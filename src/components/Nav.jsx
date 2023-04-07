@@ -1,10 +1,38 @@
 import SearchBar from "./SearchBar";
+import { NavLink } from "react-router-dom";
 
-const Nav = (props) => {
+const Nav = ({onSearch,}) => {
   return ( 
-    <SearchBar
-    onSearch={props.onSearch}
+    <div>
+      <SearchBar
+    onSearch={onSearch}
     />
+    <NavLink
+      to="/home"
+      className={({ isActive, isPending }) =>
+        isPending ? "pending" : isActive ? "active" : ""
+      }
+    >
+      <button>Home</button>
+    </NavLink>
+    <NavLink
+      to="/about"
+      className={({ isActive, isPending }) =>
+        isPending ? "pending" : isActive ? "active" : ""
+      }
+    >
+      <button>About</button>
+    </NavLink>
+    <NavLink
+      to="/"
+      className={({ isActive, isPending }) =>
+        isPending ? "pending" : isActive ? "active" : ""
+      }
+    >
+      <button onClick={console.log()}>Log Out</button>
+    </NavLink>
+    </div>
+    
    );
 }
  
