@@ -3,7 +3,7 @@ import Card from '../components/Card';
 export default function Cards(props) {
    
    return <div>
-      {props.characters.map(({id, name, status, species, gender, origin, image, onClose}) =>(
+      {props.characters.map(({id, name, status, species, gender, origin, image}) =>(
          //e desestructurado
          <Card 
             key={id}

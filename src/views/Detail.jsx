@@ -6,9 +6,11 @@ function Detail() {
   //console.log(params);
   const { detailId } = useParams();
   const [character, setCharacter] = useState({});
+  const URL_BASE = 'https://be-a-rym.up.railway.app/api/character',
+  API_KEY = '63c4e80e9996.753191aab329ade011ee';
 
   useEffect(() => {
-    axios(`https://rickandmortyapi.com/api/character/${detailId}`)
+    axios(`${URL_BASE}/${detailId}?key=${API_KEY}`)
     .then(({ data }) => {
        if (data.name) {
           setCharacter(data);

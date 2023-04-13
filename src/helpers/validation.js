@@ -10,7 +10,6 @@ passwordRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
 
 export default function validation (obj) {
   let errors = {};
-  console.log(!obj.email)
   if(!obj.email){
     errors.email = 'Se requiere un nombre';
   }

@@ -9,7 +9,10 @@ import About from './views/About';
 import Detail from './views/Detail';
 import Error404 from './views/Error404';
 import Form from './views/Form';
+import Favorites from './views/Favorites';
 
+const URL_BASE = 'https://be-a-rym.up.railway.app/api/character',
+API_KEY = '63c4e80e9996.753191aab329ade011ee';
 
 function App() {
    const [characters, setCharacters] = useState([]);
@@ -52,7 +55,7 @@ function App() {
    function onSearch(id) {
       if(!repetido(characters, id)) return window.alert('¡Ya hay personajes con este ID!!!!!'); 
       if(id > 826 || id < 1) return window.alert('¡No hay personajes con este ID!!!!!');
-      axios(`https://rickandmortyapi.com/api/character/${id}`)
+      axios(`${URL_BASE}/${id}?key=${API_KEY}`)
       .then(({ data }) => {
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
@@ -79,6 +82,7 @@ function App() {
             <Route path="/" element={<Form login={login}/>}/>
             <Route path="/home" element={<Cards characters={characters} onClose={onClose}/>}/>
             <Route path="/about" element={<About/>}/>
+            <Route path="/favorites" element={<Favorites onClose={onClose}/>}/>
             <Route path="/detail/:detailId" element={<Detail/>}/>
             {/* acá arriba ^^^^va el :id xq el id lo pasa el elemento Detail x medio del useParam */}
             <Route path="*" element={<Error404/>}/>

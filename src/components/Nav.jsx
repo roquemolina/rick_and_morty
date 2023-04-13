@@ -16,6 +16,14 @@ const Nav = ({onSearch,}) => {
       <button>Home</button>
     </NavLink>
     <NavLink
+      to="/favorites"
+      className={({ isActive, isPending }) =>
+        isPending ? "pending" : isActive ? "active" : ""
+      }
+    >
+      <button>Favorites</button>
+    </NavLink>
+    <NavLink
       to="/about"
       className={({ isActive, isPending }) =>
         isPending ? "pending" : isActive ? "active" : ""
