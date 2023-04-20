@@ -13,6 +13,7 @@ function Detail() {
     /* axios(`${URL_BASE}/${detailId}?key=${API_KEY}`) */
     axios(`http://localhost:3001/rickandmorty/character/${detailId}`)
     .then(({ data }) => {
+      console.log(data)
        if (data.name) {
           setCharacter(data);
        } else {

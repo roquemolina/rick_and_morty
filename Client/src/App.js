@@ -11,8 +11,8 @@ import Error404 from './views/Error404';
 import Form from './views/Form';
 import Favorites from './views/Favorites';
 
-const URL_BASE = 'https://be-a-rym.up.railway.app/api/character',
-API_KEY = '63c4e80e9996.753191aab329ade011ee';
+/* const URL_BASE = 'https://be-a-rym.up.railway.app/api/character',
+API_KEY = '63c4e80e9996.753191aab329ade011ee'; */
 
 function App() {
    const [characters, setCharacters] = useState([]);
@@ -63,6 +63,9 @@ function App() {
          } else {
             window.alert('¡No hay personajes con este ID!');
          }
+      })
+      .catch((err) => {
+         console.log('hubo un error');
       });
    };
 
