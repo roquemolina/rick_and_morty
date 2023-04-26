@@ -1,13 +1,47 @@
 const axios = require('axios');
 
-function getCharById(res, id) {
-  axios.get(`https://rickandmortyapi.com/api/character/${id}`)
+const URL_BASE = 'https://be-a-rym.up.railway.app/api/character',
+API_KEY = '63c4e80e9996.753191aab329ade011ee';
+
+async function getCharById(req, res) {
+  const { id }= req.params;
+  try {
+    let response = await axios.get(`${URL_BASE}/${id}?key=${API_KEY}`);
+      let data = response.data;
+      let objData = {
+        'id' : data.id,
+        'name' : data.name,
+        'status': data.status,
+        'species': data.species,
+        'gender': data.gender,
+        'origin': data.origin,
+        'image': data.image,
+      }
+    return res.status(200).json(objData);
+  } catch (error) {
+    return res.status(500).json({error: err.message})
+  }
+/* function getCharById(req, res) {
+  const { id }= req.params;
+  axios.get(`${URL_BASE}/${id}?key=${API_KEY}`)
   .then(
-    (response) => {response.data},
+    (response) => {
+      let data = response.data;
+      let objData = {
+        'id' : data.id,
+        'name' : data.name,
+        'status': data.status,
+        'species': data.species,
+        'gender': data.gender,
+        'origin': data.origin,
+        'image': data.image,
+      }
+    return res.status(200).json(objData);
+    }
   )
-  .then()
-
-
+  .catch(err => {
+    return res.status(500).json({error: err.message})
+  }) */
 }
 
-module.exports = {getCharById};
+module.exports = getCharById;

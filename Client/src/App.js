@@ -25,7 +25,7 @@ function App() {
    const EMAIL = 'ee@ee.ee',
    PASSWORD = '12345q';
 
-   function login(userData) {
+   /* function login(userData) {
       if (userData.password === PASSWORD && userData.email === EMAIL) {
          setAccess(true);
          navigate('/home');
@@ -33,7 +33,28 @@ function App() {
       else {
          window.alert('usuario o contra inco')
       }
-   }
+   } */
+   async function login(userData) {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      try {
+         let {data} = await axios(URL + `?email=${email}&password=${password}`);
+         const { access } = data;
+         setAccess(data);
+         access && navigate('/home');
+      } catch (error) {
+         window.alert("pass incorecto");
+      }
+   };
+   /* function login(userData) {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+         const { access } = data;
+         setAccess(data);
+         access && navigate('/home');
+      });
+   }; */
 
    useEffect(() => {
       !access && navigate('/');
@@ -52,11 +73,26 @@ function App() {
       return includes;
    }
 
-   function onSearch(id) {
+   async function onSearch(id) {
       if(!repetido(characters, id)) return window.alert('¡Ya hay personajes con este ID!!!!!'); 
       if(id > 826 || id < 1) return window.alert('¡No hay personajes con este ID!!!!!');
       /* axios(`${URL_BASE}/${id}?key=${API_KEY}`) */
-      axios(`http://localhost:3001/rickandmorty/character/${id}`)
+      try {
+         let {data} = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
+         if (data.name) {
+            setCharacters((oldChars) => [...oldChars, data]);
+         } else {
+            window.alert('¡No hay personajes con este ID!');
+         }
+      } catch (error) {
+         console.log('hubo un error');
+      }
+   };
+   /* function onSearch(id) {
+      if(!repetido(characters, id)) return window.alert('¡Ya hay personajes con este ID!!!!!'); 
+      if(id > 826 || id < 1) return window.alert('¡No hay personajes con este ID!!!!!');
+      /* axios(`${URL_BASE}/${id}?key=${API_KEY}`) */
+     /* axios(`http://localhost:3001/rickandmorty/character/${id}`)
       .then(({ data }) => {
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
@@ -67,7 +103,7 @@ function App() {
       .catch((err) => {
          console.log('hubo un error');
       });
-   };
+   }; */
 
    function onClose(id) {
       let newChar = characters.filter (el => el.id !== id);
