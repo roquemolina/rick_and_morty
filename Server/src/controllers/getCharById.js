@@ -18,8 +18,8 @@ async function getCharById(req, res) {
         'image': data.image,
       }
     return res.status(200).json(objData);
-  } catch (error) {
-    return res.status(500).json({error: err.message})
+  } catch (err) {
+    return res.status(400).json({error: err.message})
   }
 /* function getCharById(req, res) {
   const { id }= req.params;
