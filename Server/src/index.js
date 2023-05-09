@@ -4,6 +4,7 @@ const server = express();
 const PORT = 3001;
 const router = require("./routes/index");
 const app = require("./app");
+const {conn } = require('./DB_connection');
 
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -24,8 +25,9 @@ server.use(morgan('dev'));
 
 server.use("/rickandmorty", router);
 
-server.listen(PORT, () => {
-   console.log('Server raised in port: ' + PORT);
+server.listen(PORT, async () => {
+  await conn.sync({force:true})
+  console.log('Server raised in port: ' + PORT);
 });
 
 /* var http = require("http");

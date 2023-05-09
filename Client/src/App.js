@@ -78,7 +78,7 @@ function App() {
       if(id > 826 || id < 1) return window.alert('¡No hay personajes con este ID!!!!!');
       /* axios(`${URL_BASE}/${id}?key=${API_KEY}`) */
       try {
-         let {data} = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
+         let { data } = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
          if (data.name) {
             setCharacters((oldChars) => [...oldChars, data]);
          } else {
